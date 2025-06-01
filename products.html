@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>รายการสินค้า</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f7f7f7;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      color: #4a90e2;
+    }
+    .product {
+      background: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .product h2 {
+      margin-top: 0;
+    }
+    .product button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .product button:hover {
+      background-color: #357ab8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>รายการสินค้า</h1>
+
+  <div class="product">
+    <h2>กระเป๋าผ้าแฮนด์เมด</h2>
+    <p>ราคา: 350 บาท</p>
+    <button onclick="addToCart('กระเป๋าผ้าแฮนด์เมด', 350)">หยิบใส่ตะกร้า</button>
+  </div>
+
+  <div class="product">
+    <h2>เสื้อยืดลายท่องเที่ยว</h2>
+    <p>ราคา: 290 บาท</p>
+    <button onclick="addToCart('เสื้อยืดลายท่องเที่ยว', 290)">หยิบใส่ตะกร้า</button>
+  </div>
+
+  <div class="product">
+    <h2>หมวกเดินทาง</h2>
+    <p>ราคา: 190 บาท</p>
+    <button onclick="addToCart('หมวกเดินทาง', 190)">หยิบใส่ตะกร้า</button>
+  </div>
+
+  <script>
+    function addToCart(productName, price) {
+      alert(productName + ' ถูกเพิ่มลงในตะกร้าแล้ว (ราคา ' + price + ' บาท)');
+    }
+  </script>
+
+</body>
+</html>
