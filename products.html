@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>รายการสินค้า</title>
+  <title>ร้านค้า</title>
   <style>
     body {
       font-family: sans-serif;
@@ -14,15 +14,21 @@
     h1 {
       color: #4a90e2;
     }
-    .product {
+    .nav {
+      margin-bottom: 20px;
+    }
+    .nav a {
+      margin-right: 15px;
+      color: #4a90e2;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .product, .cart-item {
       background: white;
       padding: 15px;
       margin-bottom: 20px;
       border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .product h2 {
-      margin-top: 0;
     }
     .product button {
       background-color: #4a90e2;
@@ -39,29 +45,69 @@
 </head>
 <body>
 
-  <h1>รายการสินค้า</h1>
+  <h1>ร้านค้า</h1>
 
-  <div class="product">
-    <h2>กระเป๋าผ้าแฮนด์เมด</h2>
-    <p>ราคา: 350 บาท</p>
-    <button onclick="addToCart('กระเป๋าผ้าแฮนด์เมด', 350)">หยิบใส่ตะกร้า</button>
+  <div class="nav">
+    <a onclick="showSection('products')">ดูสินค้า</a>
+    <a onclick="showSection('cart')">ดูตะกร้า</a>
   </div>
 
-  <div class="product">
-    <h2>เสื้อยืดลายท่องเที่ยว</h2>
-    <p>ราคา: 290 บาท</p>
-    <button onclick="addToCart('เสื้อยืดลายท่องเที่ยว', 290)">หยิบใส่ตะกร้า</button>
+  <!-- ส่วนสินค้า -->
+  <div id="products">
+    <div class="product">
+      <h2>กระเป๋าผ้าแฮนด์เมด</h2>
+      <p>ราคา: 350 บาท</p>
+      <button onclick="addToCart('กระเป๋าผ้าแฮนด์เมด', 350)">หยิบใส่ตะกร้า</button>
+    </div>
+
+    <div class="product">
+      <h2>เสื้อยืดลายท่องเที่ยว</h2>
+      <p>ราคา: 290 บาท</p>
+      <button onclick="addToCart('เสื้อยืดลายท่องเที่ยว', 290)">หยิบใส่ตะกร้า</button>
+    </div>
+
+    <div class="product">
+      <h2>หมวกเดินทาง</h2>
+      <p>ราคา: 190 บาท</p>
+      <button onclick="addToCart('หมวกเดินทาง', 190)">หยิบใส่ตะกร้า</button>
+    </div>
   </div>
 
-  <div class="product">
-    <h2>หมวกเดินทาง</h2>
-    <p>ราคา: 190 บาท</p>
-    <button onclick="addToCart('หมวกเดินทาง', 190)">หยิบใส่ตะกร้า</button>
+  <!-- ส่วนตะกร้า -->
+  <div id="cart" style="display: none;">
+    <h2>ตะกร้าสินค้า</h2>
+    <div id="cart-items"></div>
   </div>
 
   <script>
+    const cart = [];
+
+    function showSection(section) {
+      document.getElementById('products').style.display = section === 'products' ? 'block' : 'none';
+      document.getElementById('cart').style.display = section === 'cart' ? 'block' : 'none';
+    }
+
     function addToCart(productName, price) {
+      cart.push({ name: productName, price: price });
       alert(productName + ' ถูกเพิ่มลงในตะกร้าแล้ว (ราคา ' + price + ' บาท)');
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartItemsDiv = document.getElementById('cart-items');
+      cartItemsDiv.innerHTML = ''; // ล้างรายการเก่าก่อน
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p>ตะกร้าว่าง</p>';
+        return;
+      }
+
+      cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `<strong>${item.name}</strong><br>ราคา: ${item.price} บาท`;
+        cartItemsDiv.appendChild(itemDiv);
+      });
     }
   </script>
 
